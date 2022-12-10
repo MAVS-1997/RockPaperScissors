@@ -1,8 +1,9 @@
 let ComputerChoice;
 let UserChoice;
-console.log("Hello world");
-
+let score;
+console.log("ROCK PAPER SCISSORS");
 console.log(game());
+
 
 function getComputerChoice(){
     let choice = Math.floor(Math.random() * 3); //Randomly asigns a value between 0 and 2, 0=rock 1 = paper 2 = scissors
@@ -15,9 +16,7 @@ function getComputerChoice(){
 }
 function userSelection(selection){
     selection = selection.toLowerCase();
-    if(selection != "rock" && selection != "paper" && selection != "scissors"){
-        return "invalid input";
-    }else return selection;
+    return selection;
     
 }
 function round(user, computer){//Returns a value according to the winner
@@ -61,6 +60,9 @@ function RoundWinner(a){//acoording to the value returned on the function "round
     }
 }
 function game(){
+    let UserWinCount=0;
+    let ComputerWinCount=0;
+    let score;
     for(let i=0; i<5; i++){
     console.log(`Round ${i + 1}`);
     UserChoice = prompt("What's your choice?");
@@ -68,7 +70,24 @@ function game(){
     ComputerChoice = getComputerChoice(); 
     console.log(`User chose: ${UserChoice}`);
     console.log(`Computer chose: ${ComputerChoice}`);
+    score = round(UserChoice, ComputerChoice);
     console.log(RoundWinner(round(UserChoice, ComputerChoice)));
+    if(score < 3){
+        UserWinCount++;
+    }else if (score <=5 ){
+        ComputerWinCount++;
+
+    }else {//if tie both adds
+        UserWinCount++;
+        ComputerWinCount++;
     }
+    console.log(`score user: ${UserWinCount} computer: ${ComputerWinCount}`);
+    console.log('');
+    }
+    if(UserWinCount>ComputerWinCount){
+        return "User wins";
+    }else if(UserWinCount<ComputerWinCount){
+        return "Computer wins"
+    }else return "its a tie"
 }
 
