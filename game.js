@@ -1,14 +1,8 @@
 let ComputerChoice;
 let UserChoice;
 console.log("Hello world");
-UserChoice = prompt("What's your choice?");
-UserChoice = userSelection(UserChoice);
-ComputerChoice = getComputerChoice(); //Changes to lowercase to compare the strings
-console.log(round(UserChoice, ComputerChoice));
 
-console.log(`User chose: ${UserChoice}`);
-console.log(`Computer chose: ${ComputerChoice}`);
-console.log(winner(round(UserChoice, ComputerChoice)));
+console.log(game());
 
 function getComputerChoice(){
     let choice = Math.floor(Math.random() * 3); //Randomly asigns a value between 0 and 2, 0=rock 1 = paper 2 = scissors
@@ -21,7 +15,10 @@ function getComputerChoice(){
 }
 function userSelection(selection){
     selection = selection.toLowerCase();
-    return selection;
+    if(selection != "rock" && selection != "paper" && selection != "scissors"){
+        return "invalid input";
+    }else return selection;
+    
 }
 function round(user, computer){//Returns a value according to the winner
     if(user==="rock" && computer==="scissors"){
@@ -37,10 +34,8 @@ function round(user, computer){//Returns a value according to the winner
     }else if(computer==="scissors" && user==="paper"){
         return 5;
     }
-     
-
 }
-function winner(a){
+function RoundWinner(a){//acoording to the value returned on the function "round()" assings a message to display the winner
     switch(a){
     case 0:
         return "User won,rock beats paper";
@@ -60,8 +55,20 @@ function winner(a){
     case 5:
         return "Computer won scissors beats paper"
     break;
+
     default:
         return "tie";
+    }
+}
+function game(){
+    for(let i=0; i<5; i++){
+    console.log(`Round ${i + 1}`);
+    UserChoice = prompt("What's your choice?");
+    UserChoice = userSelection(UserChoice);//Changes to lowercase to compare the strings
+    ComputerChoice = getComputerChoice(); 
+    console.log(`User chose: ${UserChoice}`);
+    console.log(`Computer chose: ${ComputerChoice}`);
+    console.log(RoundWinner(round(UserChoice, ComputerChoice)));
     }
 }
 
